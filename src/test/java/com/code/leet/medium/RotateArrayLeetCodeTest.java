@@ -1,4 +1,4 @@
-package com.code.leet;
+package com.code.leet.medium;
 
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;

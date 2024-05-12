@@ -1,11 +1,11 @@
-package com.code.leet;
+package com.code.leet.easy;
 
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
 import java.util.Arrays;
 
-// 88. Merge Sorted Array - EASY
+// 88. Merge Sorted Array
 public class MergeArraysLeetCodeTest {
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {

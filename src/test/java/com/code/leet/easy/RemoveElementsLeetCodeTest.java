@@ -1,4 +1,4 @@
-package com.code.leet;
+package com.code.leet.easy;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,7 +6,7 @@ import org.opentest4j.AssertionFailedError;
 
 import java.util.Arrays;
 
-// 27. Remove Element - EASY
+// 27. Remove Element
 public class RemoveElementsLeetCodeTest {
 
     public int removeElement(int[] nums, int val) {

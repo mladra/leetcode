@@ -1,4 +1,4 @@
-package com.code.leet;
+package com.code.leet.hard;
 
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// 68. Text Justification - HARD
+// 68. Text Justification
 public class TextJustificationLeetCodeTest {
 
     public static class LineData {
