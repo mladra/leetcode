@@ -36,11 +36,11 @@ public class RemoveElementsLeetCodeTest {
         return count;
     }
 
-    @ParameterizedTest(name = "nums={0}, val={1}, expectedK={2}, expectedNums={3}")
+    @ParameterizedTest(name = "nums={0}, val={1}, expectedNums={2}")
     @MethodSource("testInput")
-    void test(int[] nums, int val, int expectedK, int[] expectedNums) {
+    void test(int[] nums, int val, int[] expectedNums) {
         int k = removeElement(nums, val);
-        Assertions.assertEquals(expectedK, k);
+        Assertions.assertEquals(expectedNums.length, k);
         int[] differentNums = CollectionTestUtils.subArray(nums, k);
         Arrays.sort(differentNums, 0, k);
         CollectionTestUtils.assertArray(expectedNums, differentNums);
@@ -48,10 +48,10 @@ public class RemoveElementsLeetCodeTest {
 
     private static Stream<Arguments> testInput() {
         return Stream.of(
-                Arguments.of(new int[]{3, 2, 2, 3}, 3, 2, new int[]{2, 2}),
-                Arguments.of(new int[]{0, 1, 2, 2, 3, 0, 4, 2}, 2, 5, new int[]{0, 0, 1, 3, 4}),
-                Arguments.of(new int[]{1}, 1, 0, new int[0]),
-                Arguments.of(new int[]{3, 3}, 3, 0, new int[0])
+                Arguments.of(new int[]{3, 2, 2, 3}, 3, new int[]{2, 2}),
+                Arguments.of(new int[]{0, 1, 2, 2, 3, 0, 4, 2}, 2, new int[]{0, 0, 1, 3, 4}),
+                Arguments.of(new int[]{1}, 1, new int[0]),
+                Arguments.of(new int[]{3, 3}, 3, new int[0])
         );
     }
 

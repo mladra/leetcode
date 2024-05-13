@@ -24,23 +24,23 @@ public class RemoveDuplicatesFromSortedArrayLeetCodeTest {
         return unique.size();
     }
 
-    @ParameterizedTest(name = "nums={0}, expectedK={1}, expectedArray={2}")
+    @ParameterizedTest(name = "nums={0}, expectedArray={1}")
     @MethodSource("testInput")
-    void test(int[] nums, int expectedK, int[] expectedArray) {
+    void test(int[] nums, int[] expectedArray) {
         int k = removeDuplicates(nums);
-        Assertions.assertEquals(expectedK, k);
+        Assertions.assertEquals(expectedArray.length, k);
         int[] differentNums = CollectionTestUtils.subArray(nums, k);
         CollectionTestUtils.assertArray(expectedArray, differentNums);
     }
 
     private static Stream<Arguments> testInput() {
         return Stream.of(
-                Arguments.of(new int[]{1, 1, 2}, 2, new int[]{1, 2}),
-                Arguments.of(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}, 5, new int[]{0, 1, 2, 3, 4}),
-                Arguments.of(new int[]{1}, 1, new int[]{1}),
-                Arguments.of(new int[]{1, 2}, 2, new int[]{1, 2}),
-                Arguments.of(new int[]{1, 1}, 1, new int[]{1}),
-                Arguments.of(new int[]{-3, -1, 0, 0, 0, 3, 3}, 4, new int[]{-3, -1, 0, 3})
+                Arguments.of(new int[]{1, 1, 2}, new int[]{1, 2}),
+                Arguments.of(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}, new int[]{0, 1, 2, 3, 4}),
+                Arguments.of(new int[]{1}, new int[]{1}),
+                Arguments.of(new int[]{1, 2}, new int[]{1, 2}),
+                Arguments.of(new int[]{1, 1}, new int[]{1}),
+                Arguments.of(new int[]{-3, -1, 0, 0, 0, 3, 3}, new int[]{-3, -1, 0, 3})
         );
     }
 }
