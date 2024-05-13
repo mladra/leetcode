@@ -1,9 +1,7 @@
 package com.code.leet.easy;
 
+import com.code.leet.utils.CollectionTestUtils;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
-
-import java.util.Arrays;
 
 // 88. Merge Sorted Array
 public class MergeArraysLeetCodeTest {
@@ -40,7 +38,7 @@ public class MergeArraysLeetCodeTest {
 
         merge(nums1, m, nums2, n);
 
-        assertArray(new int[] { 1, 2, 2, 3, 5, 6 }, nums1);
+        CollectionTestUtils.assertArray(new int[] { 1, 2, 2, 3, 5, 6 }, nums1);
     }
 
     @Test
@@ -52,7 +50,7 @@ public class MergeArraysLeetCodeTest {
 
         merge(nums1, m, nums2, n);
 
-        assertArray(new int[] { 1 }, nums1);
+        CollectionTestUtils.assertArray(new int[] { 1 }, nums1);
     }
 
     @Test
@@ -64,7 +62,7 @@ public class MergeArraysLeetCodeTest {
 
         merge(nums1, m, nums2, n);
 
-        assertArray(new int[] { 1 }, nums1);
+        CollectionTestUtils.assertArray(new int[] { 1 }, nums1);
     }
 
     @Test
@@ -76,19 +74,7 @@ public class MergeArraysLeetCodeTest {
 
         merge(nums1, m, nums2, n);
 
-        assertArray(new int[] { 1, 2, 3, 4, 5 }, nums1);
-    }
-
-    private static void assertArray(int[] expected, int[] actual) {
-        if (expected == null && actual == null) return;
-        if (expected == null) throw new AssertionFailedError("Arrays are not the same", Arrays.toString(expected), Arrays.toString(actual));
-        if (actual == null) throw new AssertionFailedError("Arrays are not the same", Arrays.toString(expected), Arrays.toString(actual));
-        if (expected.length != actual.length) throw new AssertionFailedError("Arrays are different in size", expected.length, actual.length);
-        for (int i = 0; i < expected.length; i++) {
-            if (expected[i] != actual[i]) {
-                throw new AssertionFailedError("Arrays are not the same", Arrays.toString(expected), Arrays.toString(actual));
-            }
-        }
+        CollectionTestUtils.assertArray(new int[] { 1, 2, 3, 4, 5 }, nums1);
     }
 
 }

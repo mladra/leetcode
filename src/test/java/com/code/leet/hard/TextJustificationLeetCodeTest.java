@@ -1,7 +1,7 @@
 package com.code.leet.hard;
 
+import com.code.leet.utils.CollectionTestUtils;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,7 +93,7 @@ public class TextJustificationLeetCodeTest {
                 "example  of text",
                 "justification.  "
         );
-        assertList(expectedResults, output);
+        CollectionTestUtils.assertList(expectedResults, output);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class TextJustificationLeetCodeTest {
                 "acknowledgment  ",
                 "shall be        "
         );
-        assertList(expectedResults, output);
+        CollectionTestUtils.assertList(expectedResults, output);
     }
 
     @Test
@@ -126,12 +126,12 @@ public class TextJustificationLeetCodeTest {
                 "everything  else  we",
                 "do                  "
         );
-        assertList(expectedResults, output);
+        CollectionTestUtils.assertList(expectedResults, output);
     }
 
     @Test
     void test4() {
-        String[] words = new String[]{"Listen","to","many,","speak","to","a","few."};
+        String[] words = new String[]{"Listen", "to", "many,", "speak", "to", "a", "few."};
         int maxWidth = 6;
 
         List<String> output = fullJustify(words, maxWidth);
@@ -144,35 +144,20 @@ public class TextJustificationLeetCodeTest {
                 "to   a",
                 "few.  "
         );
-        assertList(expectedResults, output);
+        CollectionTestUtils.assertList(expectedResults, output);
     }
 
     @Test
     void test5() {
-        String[] words = new String[]{"a","b","c","d","e"};
+        String[] words = new String[]{"a", "b", "c", "d", "e"};
         int maxWidth = 1;
 
         List<String> output = fullJustify(words, maxWidth);
 
         List<String> expectedResults = List.of(
-                "a","b","c","d","e"
+                "a", "b", "c", "d", "e"
         );
-        assertList(expectedResults, output);
-    }
-
-    private static void assertList(List<String> expected, List<String> actual) {
-        if (expected == null && actual == null) return;
-        if (expected == null)
-            throw new AssertionFailedError("Lists are not the same", expected, actual);
-        if (actual == null)
-            throw new AssertionFailedError("Lists are not the same", expected, actual);
-        if (expected.size() != actual.size())
-            throw new AssertionFailedError("Lists are different in size", expected.size(), actual.size());
-        for (int i = 0; i < expected.size(); i++) {
-            if (!expected.get(i).equals(actual.get(i))) {
-                throw new AssertionFailedError("Lists are not the same", expected, actual);
-            }
-        }
+        CollectionTestUtils.assertList(expectedResults, output);
     }
 
 }

@@ -1,9 +1,7 @@
 package com.code.leet.medium;
 
+import com.code.leet.utils.CollectionTestUtils;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
-
-import java.util.Arrays;
 
 // 189. Rotate Array
 public class RotateArrayLeetCodeTest {
@@ -35,7 +33,7 @@ public class RotateArrayLeetCodeTest {
         int[] nums = new int[]{1, 2, 3, 4, 5, 6, 7};
         int k = 3;
         rotate1(nums, k);
-        assertArray(new int[]{5, 6, 7, 1, 2, 3, 4}, nums);
+        CollectionTestUtils.assertArray(new int[]{5, 6, 7, 1, 2, 3, 4}, nums);
     }
 
     @Test
@@ -43,7 +41,7 @@ public class RotateArrayLeetCodeTest {
         int[] nums = new int[]{-1, -100, 3, 99};
         int k = 2;
         rotate1(nums, k);
-        assertArray(new int[]{3, 99, -1, -100}, nums);
+        CollectionTestUtils.assertArray(new int[]{3, 99, -1, -100}, nums);
     }
 
     @Test
@@ -51,7 +49,7 @@ public class RotateArrayLeetCodeTest {
         int[] nums = new int[]{1, 2, 3, 4, 5, 6, 7};
         int k = 3;
         rotate2(nums, k);
-        assertArray(new int[]{5, 6, 7, 1, 2, 3, 4}, nums);
+        CollectionTestUtils.assertArray(new int[]{5, 6, 7, 1, 2, 3, 4}, nums);
     }
 
     @Test
@@ -59,21 +57,6 @@ public class RotateArrayLeetCodeTest {
         int[] nums = new int[]{-1, -100, 3, 99};
         int k = 2;
         rotate2(nums, k);
-        assertArray(new int[]{3, 99, -1, -100}, nums);
-    }
-
-    private static void assertArray(int[] expected, int[] actual) {
-        if (expected == null && actual == null) return;
-        if (expected == null)
-            throw new AssertionFailedError("Arrays are not the same", Arrays.toString(expected), Arrays.toString(actual));
-        if (actual == null)
-            throw new AssertionFailedError("Arrays are not the same", Arrays.toString(expected), Arrays.toString(actual));
-        if (expected.length != actual.length)
-            throw new AssertionFailedError("Arrays are different in size", expected.length, actual.length);
-        for (int i = 0; i < expected.length; i++) {
-            if (expected[i] != actual[i]) {
-                throw new AssertionFailedError("Arrays are not the same", Arrays.toString(expected), Arrays.toString(actual));
-            }
-        }
+        CollectionTestUtils.assertArray(new int[]{3, 99, -1, -100}, nums);
     }
 }
