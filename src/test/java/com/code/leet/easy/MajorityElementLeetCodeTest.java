@@ -1,9 +1,12 @@
 package com.code.leet.easy;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 // 169. Majority Element
 public class MajorityElementLeetCodeTest {
@@ -30,25 +33,19 @@ public class MajorityElementLeetCodeTest {
         return biggestNum;
     }
 
-    @Test
-    void test1() {
-        int[] nums = new int[]{3, 2, 3};
+    @ParameterizedTest(name = "nums={0}, expectedMajorityNumber={1}")
+    @MethodSource("testInput")
+    void test(int[] nums, int expectedNumber) {
         int element = majorityElement(nums);
-        Assertions.assertEquals(3, element);
+        Assertions.assertEquals(expectedNumber, element);
     }
 
-    @Test
-    void test2() {
-        int[] nums = new int[]{2, 2, 1, 1, 1, 2, 2};
-        int element = majorityElement(nums);
-        Assertions.assertEquals(2, element);
-    }
-
-    @Test
-    void test3() {
-        int[] nums = new int[]{1};
-        int element = majorityElement(nums);
-        Assertions.assertEquals(1, element);
+    private static Stream<Arguments> testInput() {
+        return Stream.of(
+                Arguments.of(new int[]{3, 2, 3}, 3),
+                Arguments.of(new int[]{2, 2, 1, 1, 1, 2, 2}, 2),
+                Arguments.of(new int[]{1}, 1)
+        );
     }
 
 }

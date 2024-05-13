@@ -2,9 +2,12 @@ package com.code.leet.easy;
 
 import com.code.leet.utils.CollectionTestUtils;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 // 27. Remove Element
 public class RemoveElementsLeetCodeTest {
@@ -33,52 +36,23 @@ public class RemoveElementsLeetCodeTest {
         return count;
     }
 
-    @Test
-    void test1() {
-        int[] array = new int[]{3, 2, 2, 3};
-        int val = 3;
-
-        int k = removeElement(array, val);
-        Assertions.assertEquals(2, k);
-        int[] differentNumbers = CollectionTestUtils.subArray(array, k);
-        Arrays.sort(differentNumbers);
-        CollectionTestUtils.assertArray(new int[]{2, 2}, differentNumbers);
+    @ParameterizedTest(name = "nums={0}, val={1}, expectedK={2}, expectedNums={3}")
+    @MethodSource("testInput")
+    void test(int[] nums, int val, int expectedK, int[] expectedNums) {
+        int k = removeElement(nums, val);
+        Assertions.assertEquals(expectedK, k);
+        int[] differentNums = CollectionTestUtils.subArray(nums, k);
+        Arrays.sort(differentNums, 0, k);
+        CollectionTestUtils.assertArray(expectedNums, differentNums);
     }
 
-    @Test
-    void test2() {
-        int[] array = new int[]{0, 1, 2, 2, 3, 0, 4, 2};
-        int val = 2;
-
-        int k = removeElement(array, val);
-        Assertions.assertEquals(5, k);
-        int[] differentNumbers = CollectionTestUtils.subArray(array, k);
-        Arrays.sort(differentNumbers);
-        CollectionTestUtils.assertArray(new int[]{0, 0, 1, 3, 4}, differentNumbers);
-    }
-
-    @Test
-    void test3() {
-        int[] array = new int[]{1};
-        int val = 1;
-
-        int k = removeElement(array, val);
-        Assertions.assertEquals(0, k);
-        int[] differentNumbers = CollectionTestUtils.subArray(array, k);
-        Arrays.sort(array, 0, k);
-        CollectionTestUtils.assertArray(new int[0], differentNumbers);
-    }
-
-    @Test
-    void test4() {
-        int[] array = new int[]{3, 3};
-        int val = 3;
-
-        int k = removeElement(array, val);
-        Assertions.assertEquals(0, k);
-        int[] differentNums = CollectionTestUtils.subArray(array, k);
-        Arrays.sort(array, 0, k);
-        CollectionTestUtils.assertArray(new int[0], differentNums);
+    private static Stream<Arguments> testInput() {
+        return Stream.of(
+                Arguments.of(new int[]{3, 2, 2, 3}, 3, 2, new int[]{2, 2}),
+                Arguments.of(new int[]{0, 1, 2, 2, 3, 0, 4, 2}, 2, 5, new int[]{0, 0, 1, 3, 4}),
+                Arguments.of(new int[]{1}, 1, 0, new int[0]),
+                Arguments.of(new int[]{3, 3}, 3, 0, new int[0])
+        );
     }
 
 }

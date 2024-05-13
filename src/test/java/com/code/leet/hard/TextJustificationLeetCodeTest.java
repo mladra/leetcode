@@ -1,11 +1,14 @@
 package com.code.leet.hard;
 
 import com.code.leet.utils.CollectionTestUtils;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 // 68. Text Justification
 public class TextJustificationLeetCodeTest {
@@ -81,83 +84,21 @@ public class TextJustificationLeetCodeTest {
         return lines.stream().map(LineData::getLine).toList();
     }
 
-    @Test
-    void test1() {
-        String[] words = new String[]{"This", "is", "an", "example", "of", "text", "justification."};
-        int maxWidth = 16;
-
+    @ParameterizedTest(name = "word={0}, maxWidth={1}, expectedLines={2}")
+    @MethodSource("testInput")
+    void test(String[] words, int maxWidth, List<String> expectedLines) {
         List<String> output = fullJustify(words, maxWidth);
-
-        List<String> expectedResults = List.of(
-                "This    is    an",
-                "example  of text",
-                "justification.  "
-        );
-        CollectionTestUtils.assertList(expectedResults, output);
+        CollectionTestUtils.assertList(expectedLines, output);
     }
 
-    @Test
-    void test2() {
-        String[] words = new String[]{"What", "must", "be", "acknowledgment", "shall", "be"};
-        int maxWidth = 16;
-
-        List<String> output = fullJustify(words, maxWidth);
-
-        List<String> expectedResults = List.of(
-                "What   must   be",
-                "acknowledgment  ",
-                "shall be        "
+    private static Stream<Arguments> testInput() {
+        return Stream.of(
+                Arguments.of(new String[]{"This", "is", "an", "example", "of", "text", "justification."}, 16, List.of("This    is    an", "example  of text", "justification.  ")),
+                Arguments.of(new String[]{"What", "must", "be", "acknowledgment", "shall", "be"}, 16, List.of("What   must   be", "acknowledgment  ", "shall be        ")),
+                Arguments.of(new String[]{"Science", "is", "what", "we", "understand", "well", "enough", "to", "explain", "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"}, 20, List.of("Science  is  what we", "understand      well", "enough to explain to", "a  computer.  Art is", "everything  else  we", "do                  ")),
+                Arguments.of(new String[]{"Listen", "to", "many,", "speak", "to", "a", "few."}, 6, List.of("Listen", "to    ", "many, ", "speak ", "to   a", "few.  ")),
+                Arguments.of(new String[]{"a", "b", "c", "d", "e"}, 1, List.of("a", "b", "c", "d", "e"))
         );
-        CollectionTestUtils.assertList(expectedResults, output);
-    }
-
-    @Test
-    void test3() {
-        String[] words = new String[]{"Science", "is", "what", "we", "understand", "well", "enough", "to", "explain", "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"};
-        int maxWidth = 20;
-
-        List<String> output = fullJustify(words, maxWidth);
-
-        List<String> expectedResults = List.of(
-                "Science  is  what we",
-                "understand      well",
-                "enough to explain to",
-                "a  computer.  Art is",
-                "everything  else  we",
-                "do                  "
-        );
-        CollectionTestUtils.assertList(expectedResults, output);
-    }
-
-    @Test
-    void test4() {
-        String[] words = new String[]{"Listen", "to", "many,", "speak", "to", "a", "few."};
-        int maxWidth = 6;
-
-        List<String> output = fullJustify(words, maxWidth);
-
-        List<String> expectedResults = List.of(
-                "Listen",
-                "to    ",
-                "many, ",
-                "speak ",
-                "to   a",
-                "few.  "
-        );
-        CollectionTestUtils.assertList(expectedResults, output);
-    }
-
-    @Test
-    void test5() {
-        String[] words = new String[]{"a", "b", "c", "d", "e"};
-        int maxWidth = 1;
-
-        List<String> output = fullJustify(words, maxWidth);
-
-        List<String> expectedResults = List.of(
-                "a", "b", "c", "d", "e"
-        );
-        CollectionTestUtils.assertList(expectedResults, output);
     }
 
 }

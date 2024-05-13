@@ -1,7 +1,11 @@
 package com.code.leet.easy;
 
 import com.code.leet.utils.CollectionTestUtils;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 // 88. Merge Sorted Array
 public class MergeArraysLeetCodeTest {
@@ -29,52 +33,20 @@ public class MergeArraysLeetCodeTest {
         }
     }
 
-    @Test
-    void test1() {
-        int[] nums1 = new int[] {1, 2, 3, 0, 0, 0};
-        int m = 3;
-        int[] nums2 = new int[] {2, 5, 6};
-        int n = 3;
-
+    @ParameterizedTest(name = "nums1={0}, m={1}, nums2={2}, n={3}")
+    @MethodSource("testInput")
+    void test(int[] nums1, int m, int[] nums2, int n, int[] expectedArray) {
         merge(nums1, m, nums2, n);
-
-        CollectionTestUtils.assertArray(new int[] { 1, 2, 2, 3, 5, 6 }, nums1);
+        CollectionTestUtils.assertArray(expectedArray, nums1);
     }
 
-    @Test
-    void test2() {
-        int[] nums1 = new int[] {1};
-        int m = 1;
-        int[] nums2 = new int[0];
-        int n = 0;
-
-        merge(nums1, m, nums2, n);
-
-        CollectionTestUtils.assertArray(new int[] { 1 }, nums1);
-    }
-
-    @Test
-    void test3() {
-        int[] nums1 = new int[] {0};
-        int m = 0;
-        int[] nums2 = new int[] {1};
-        int n = 1;
-
-        merge(nums1, m, nums2, n);
-
-        CollectionTestUtils.assertArray(new int[] { 1 }, nums1);
-    }
-
-    @Test
-    void test4() {
-        int[] nums1 = new int[] {1, 2, 3, 4, 5};
-        int m = 5;
-        int[] nums2 = new int[0];
-        int n = 0;
-
-        merge(nums1, m, nums2, n);
-
-        CollectionTestUtils.assertArray(new int[] { 1, 2, 3, 4, 5 }, nums1);
+    private static Stream<Arguments> testInput() {
+        return Stream.of(
+                Arguments.of(new int[]{1, 2, 3, 0, 0, 0}, 3, new int[]{2, 5, 6}, 3, new int[]{1, 2, 2, 3, 5, 6}),
+                Arguments.of(new int[]{1}, 1, new int[0], 0, new int[]{1}),
+                Arguments.of(new int[]{0}, 0, new int[]{1}, 1, new int[]{1}),
+                Arguments.of(new int[]{1, 2, 3, 4, 5}, 5, new int[0], 0, new int[]{1, 2, 3, 4, 5})
+        );
     }
 
 }
